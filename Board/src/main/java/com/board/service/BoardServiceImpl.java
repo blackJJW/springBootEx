@@ -19,10 +19,10 @@ public class BoardServiceImpl implements BoardService {
 	public boolean registerBoard(BoardDTO params) {
 		int queryResult = 0;
 		
-		// 컨트롤럿에서 넘어온 idx가 없다면 글 쓰기
-		if (params.getIdx() == null) {
+		//컨트롤러에서 넘어온 idx가 
+		if (params.getIdx() == null) {	//없다면 글 쓰기
 			queryResult = boardMapper.insertBoard(params);
-		} else { // 있다면 글 수정
+		} else {						//있다면 글 수정
 			queryResult = boardMapper.updateBoard(params);
 		}
 
