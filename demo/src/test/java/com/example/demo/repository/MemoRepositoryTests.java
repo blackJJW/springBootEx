@@ -1,7 +1,5 @@
 package com.example.demo.repository;
 
-import jakarta.transaction.Transactional;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.test.annotation.Commit;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.entity.Memo;
 
@@ -145,5 +145,13 @@ public class MemoRepositoryTests {
         Page<Memo> result = memoRepository.findByMnoBetween(10L, 50L, pageable);
 
         result.get().forEach(memo -> System.out.println(memo));
+    }
+
+    @Commit
+    @Transactional
+    @Test
+    public void testDeleteQueryMethods() {
+
+        memoRepository.deleteMemoByMnoLessThan(10L);
     }
 }
